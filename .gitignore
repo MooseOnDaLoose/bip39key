@@ -3,6 +3,7 @@ NOTES.html
 .cargo
 *.txt
 .direnv
+result
 # Devenv
 .devenv*
 devenv.local.nix

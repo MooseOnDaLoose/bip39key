@@ -8,21 +8,61 @@ passphrase).
 
 It can generate either
 
-* An OpenPGP EdDSA signing key + ECCDH encryption key, both using Curve25519.
-* An OpenPGP EdDSA signing key with Curve25519.
-* An OpenSSH key using EdDSA with Curve25519.
+- An OpenPGP EdDSA signing key + ECCDH encryption key, both using Curve25519.
+- An OpenPGP EdDSA signing key with Curve25519.
+- An OpenSSH key using EdDSA with Curve25519.
 
 In all cases the tool requires a User ID in [RFC 2822](https://datatracker.ietf.org/doc/html/rfc2822) format.
 
 When providing a passphrase, the tool will use it to generate the key together
-with the seed from the BIP39 mnemonic and the user id, and will also encrypt the 
-resulting OpenPGP/OpenSSH keys with  the provided passphrase.
+with the seed from the BIP39 mnemonic and the user id, and will also encrypt the
+resulting OpenPGP/OpenSSH keys with the provided passphrase.
 
 The creation timestamp for the OpenPGP keys is set to the Bitcoin genesis block
 timestamp (1231006505 in seconds from Unix epoch). GPG considers this part of
 the key so it is important to keep it consistent. We use that timestamp because
 it's easy to retrieve, and it's not zero (which can trigger bad corner cases in
 GPG).
+
+## Installation
+
+### From crates.io
+
+```bash
+cargo install bip39key
+```
+
+### From source
+
+Requires [Rust](https://rustup.rs/) (stable toolchain):
+
+```bash
+git clone https://github.com/MooseOnDaLoose/bip39key.git
+cd bip39key
+cargo build --release
+# Copy binary to a directory on your PATH, e.g.:
+cp target/release/bip39key ~/.local/bin/
+```
+
+### With Nix
+
+If you use [Nix](https://nixos.org/) with flakes:
+
+```bash
+nix profile install github:jpdarago/bip39key
+```
+
+Or enter a dev shell with all tooling available:
+
+```bash
+nix develop
+```
+
+### Verify installation
+
+```bash
+bip39key --version
+```
 
 ## Usage
 
@@ -65,8 +105,8 @@ Options:
   -b, --authorization-for-sign-key
           Add authorization capability to the sign key
   -n, --skip-passphrase-for-key-material
-          Do not add the passphrase as extra entropy. If set, the passphrase will only be 
-          used to encrypt the PGP or SSH key contents, and the key material itself will be 
+          Do not add the passphrase as extra entropy. If set, the passphrase will only be
+          used to encrypt the PGP or SSH key contents, and the key material itself will be
           generated from the seed and the user id
   -h, --help
           Print help
@@ -105,8 +145,8 @@ the User ID as the salt.
 Optionally, you can provide a passphrase. `bip39key` will then:
 
 1. If using the `--use-concatenate/-c` option, it will concatenate the seed
-with the passphrase, and then apply Argon2id to the result to produce the
-key.
+   with the passphrase, and then apply Argon2id to the result to produce the
+   key.
 2. Apply Argon2id to the seed, then to the passphrase, and then XOR both buffers.
 
 The passphrase is also used to encrypt the OpenPGP and SSH files themselves. If
@@ -122,7 +162,7 @@ then pass the `--skip-passphrase-for-key-material/-n` option.
 
 ## Running tests.
 
-This project uses the https://nixos.org/ package manager with https://devenv.sh, 
+This project uses the https://nixos.org/ package manager with https://devenv.sh,
 once you install those you can run the tests with `devenv test`.
 
 ## Acknowledgements
