@@ -41,20 +41,6 @@ cargo build --release
 cp target/release/bip39key ~/.local/bin/
 ```
 
-### With Nix
-
-If you use [Nix](https://nixos.org/) with flakes:
-
-```bash
-nix profile install github:jpdarago/bip39key
-```
-
-Or enter a dev shell with all tooling available:
-
-```bash
-nix develop
-```
-
 ### Verify installation
 
 ```bash
