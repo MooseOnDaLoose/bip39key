@@ -1,8 +1,5 @@
 # Generate an OpenPGP/OpenSSH key from a BIP39 mnemonic
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![build](https://github.com/jpdarago/bip39key/actions/workflows/rust.yml/badge.svg)
-
 Generates a cryptographical key from a [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) mnemonic (and, optionally, a
 passphrase).
 
